@@ -1,23 +1,20 @@
-// Перепишите 'if..else' в '?'
-// важность: 5
-// Перепишите if..else с использованием нескольких операторов '?'.
+// Случайное целое число от min до max
+// важность: 2
+// Напишите функцию randomInteger(min, max), которая генерирует случайное целое (integer) число от min до max (включительно).
 
-// Для читаемости рекомендуется разбить код на несколько строк.
+// Любое число из интервала min..max должно появляться с одинаковой вероятностью.
 
-// let message;
+// Пример работы функции:
 
-// if (login == 'Сотрудник') {
-//   message = 'Привет';
-// } else if (login == 'Директор') {
-//   message = 'Здравствуйте';
-// } else if (login == '') {
-//   message = 'Нет логина';
-// } else {
-//   message = '';
-// }
+// alert( randomInteger(1, 5) ); // 1
+// alert( randomInteger(1, 5) ); // 3
+// alert( randomInteger(1, 5) ); // 5
 
 
-let message = (login == 'Сотрудник') ? 'Привет' :
-    (login == 'Директор') ? 'Здравствуйте' :
-        (login == '') ? 'Нет логина' : '';
+function randomInteger(min, max) {
+    return Math.floor(min + Math.random() * (max + 1 - min));
+}
 
+console.log(randomInteger(1, 5));
+console.log(randomInteger(1, 5));
+console.log(randomInteger(1, 5));
