@@ -1,26 +1,47 @@
-// Подсчёт количества свойств объекта
+// Максимальная зарплата
 // важность: 5
-// Напишите функцию count(obj), которая возвращает количество свойств объекта:
+// У нас есть объект salaries с зарплатами:
 
-// let user = {
-//     name: 'John',
-//     age: 30
+// let salaries = {
+//     "John": 100,
+//     "Pete": 300,
+//     "Mary": 250
 // };
+// Создайте функцию topSalary(salaries), которая возвращает имя самого высокооплачиваемого сотрудника.
 
-// alert(count(user)); // 2
-// Постарайтесь сделать код как можно короче.
+// Если объект salaries пустой, то нужно вернуть null.
+// Если несколько высокооплачиваемых сотрудников, можно вернуть любого из них.
+//     P.S.Используйте Object.entries и деструктурирование, чтобы перебрать пары ключ / значение.
 
-//     P.S.Игнорируйте символьные свойства, подсчитывайте только «обычные».
 
+let salaries = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+};
 
-let user = {
-    name: 'John',
-    age: 30
+let salaries2 = {
 };
 
 
-function count(obj) {
-    return Object.keys(obj).length;
+function topSalary(obj) {
+    let arr = Object.entries(obj);
+    let maxSallary = 0;
+    let richName = '';
+
+    if (arr.length === 0) return null;
+
+    for (let [name, salary] of arr) {
+
+        if (maxSallary < salary) {
+            maxSallary = salary;
+            richName = name;
+        }
+    }
+
+    return richName;
+
 }
 
-console.log(count(user));
+console.log(topSalary(salaries));
+console.log(topSalary(salaries2));

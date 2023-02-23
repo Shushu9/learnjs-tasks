@@ -25,6 +25,12 @@
 
 let user = {
     name: "John",
-    years: 30
+    years: 30,
+    // isAdmin: true
 };
 
+let { name, years, isAdmin = false } = user;
+
+console.log(name); // John
+console.log(years); // 30
+console.log(isAdmin); // false
