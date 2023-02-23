@@ -1,41 +1,26 @@
-// Подмассив наибольшей суммы
-// важность: 2
-// На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
+// Трансформировать в массив имён
+// важность: 5
+// У вас есть массив объектов user, и в каждом из них есть user.name. Напишите код, который преобразует их в массив имён.
 
-//     Задача: найти непрерывный подмассив в arr, сумма элементов в котором максимальна.
+// Например:
 
-// Функция getMaxSubSum(arr) должна возвращать эту сумму.
+// let vasya = { name: "Вася", age: 25 };
+// let petya = { name: "Петя", age: 30 };
+// let masha = { name: "Маша", age: 28 };
 
-//     Например:
+// let users = [ vasya, petya, masha ];
 
-// getMaxSubSum([-1, 2, 3, -9]) == 5(сумма выделенных элементов)
-// getMaxSubSum([2, -1, 2, 3, -9]) == 6
-// getMaxSubSum([-1, 2, 3, -9, 11]) == 11
-// getMaxSubSum([-2, -1, 1, 2]) == 3
-// getMaxSubSum([100, -9, 2, -3, 5]) == 100
-// getMaxSubSum([1, 2, 3]) == 6(берём все)
-// Если все элементы отрицательные – ничего не берём(подмассив пустой) и сумма равна «0»:
+// let names = /* ... ваш код */
 
-// getMaxSubSum([-1, -2, -3]) = 0
-// Попробуйте придумать быстрое решение: O(n2), а лучше за О(n) операций.
+// alert( names ); // Вася, Петя, Маша
 
 
-function getMaxSubSum(arr) {
-    let max = 0;
-    let current = 0;
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
 
-    for (let elem of arr) {
-        current += elem;
-        max = Math.max(max, current);
-        if (current < 0) current = 0;
-    }
+let users = [vasya, petya, masha];
 
-    return max;
-}
+let names = users.map(item => item.name);
 
-console.log(getMaxSubSum([-1, 2, 3, -9])); // 5
-console.log(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
-console.log(getMaxSubSum([-2, -1, 1, 2])); // 3
-console.log(getMaxSubSum([100, -9, 2, -3, 5])); // 100
-console.log(getMaxSubSum([1, 2, 3])); // 6
-console.log(getMaxSubSum([-1, -2, -3])); // 0
+console.log(names);

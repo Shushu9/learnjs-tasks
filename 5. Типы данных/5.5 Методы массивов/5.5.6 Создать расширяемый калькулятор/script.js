@@ -1,41 +1,63 @@
-// Подмассив наибольшей суммы
-// важность: 2
-// На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
+// Создать расширяемый калькулятор
+// важность: 5
+// Создайте функцию конструктор Calculator, которая создаёт «расширяемые» объекты калькулятора.
 
-//     Задача: найти непрерывный подмассив в arr, сумма элементов в котором максимальна.
+// Задание состоит из двух частей.
 
-// Функция getMaxSubSum(arr) должна возвращать эту сумму.
+// Во-первых, реализуйте метод calculate(str), который принимает строку типа "1 + 2" в формате «ЧИСЛО оператор ЧИСЛО» (разделено пробелами) и возвращает результат. Метод должен понимать плюс + и минус -.
 
-//     Например:
+// Пример использования:
 
-// getMaxSubSum([-1, 2, 3, -9]) == 5(сумма выделенных элементов)
-// getMaxSubSum([2, -1, 2, 3, -9]) == 6
-// getMaxSubSum([-1, 2, 3, -9, 11]) == 11
-// getMaxSubSum([-2, -1, 1, 2]) == 3
-// getMaxSubSum([100, -9, 2, -3, 5]) == 100
-// getMaxSubSum([1, 2, 3]) == 6(берём все)
-// Если все элементы отрицательные – ничего не берём(подмассив пустой) и сумма равна «0»:
+// let calc = new Calculator;
 
-// getMaxSubSum([-1, -2, -3]) = 0
-// Попробуйте придумать быстрое решение: O(n2), а лучше за О(n) операций.
+// alert( calc.calculate("3 + 7") ); // 10
+// Затем добавьте метод addMethod(name, func), который добавляет в калькулятор новые операции. Он принимает оператор name и функцию с двумя аргументами func(a,b), которая описывает его.
+
+// Например, давайте добавим умножение *, деление / и возведение в степень **:
+
+// let powerCalc = new Calculator;
+// powerCalc.addMethod("*", (a, b) => a * b);
+// powerCalc.addMethod("/", (a, b) => a / b);
+// powerCalc.addMethod("**", (a, b) => a ** b);
+
+// let result = powerCalc.calculate("2 ** 3");
+// alert( result ); // 8
+// Для этой задачи не нужны скобки или сложные выражения.
+// Числа и оператор разделены ровно одним пробелом.
+// Не лишним будет добавить обработку ошибок.
 
 
-function getMaxSubSum(arr) {
-    let max = 0;
-    let current = 0;
+function Calculator() {
+    this.methods = {
+        "-": (a, c) => a - c,
+        "+": (a, c) => a + c
+    };
 
-    for (let elem of arr) {
-        current += elem;
-        max = Math.max(max, current);
-        if (current < 0) current = 0;
+    this.calculate = function (str) {
+        let arr = str.split(' ');
+        let a = +arr[0];
+        let b = arr[1];
+        let c = +arr[2];
+
+        return this.methods[b](a, c);
+    };
+
+    this.addMethod = function (name, func) {
+        this.methods[name] = func;
     }
-
-    return max;
 }
 
-console.log(getMaxSubSum([-1, 2, 3, -9])); // 5
-console.log(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
-console.log(getMaxSubSum([-2, -1, 1, 2])); // 3
-console.log(getMaxSubSum([100, -9, 2, -3, 5])); // 100
-console.log(getMaxSubSum([1, 2, 3])); // 6
-console.log(getMaxSubSum([-1, -2, -3])); // 0
+
+
+let calc = new Calculator;
+
+console.log(calc.calculate("3 + 7"));
+
+
+calc.addMethod("*", (a, b) => a * b);
+calc.addMethod("/", (a, b) => a / b);
+calc.addMethod("**", (a, b) => a ** b);
+
+console.log(calc.calculate("3 * 7"));
+console.log(calc.calculate("3 / 7"));
+console.log(calc.calculate("3 ** 7"));

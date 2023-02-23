@@ -1,41 +1,40 @@
-// Подмассив наибольшей суммы
-// важность: 2
-// На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
+"use strict";
 
-//     Задача: найти непрерывный подмассив в arr, сумма элементов в котором максимальна.
+// Отсортировать пользователей по возрасту
+// важность: 5
+// Напишите функцию sortByAge(users), которая принимает массив объектов со свойством age и сортирует их по нему.
 
-// Функция getMaxSubSum(arr) должна возвращать эту сумму.
+// Например:
 
-//     Например:
+// let vasya = { name: "Вася", age: 25 };
+// let petya = { name: "Петя", age: 30 };
+// let masha = { name: "Маша", age: 28 };
 
-// getMaxSubSum([-1, 2, 3, -9]) == 5(сумма выделенных элементов)
-// getMaxSubSum([2, -1, 2, 3, -9]) == 6
-// getMaxSubSum([-1, 2, 3, -9, 11]) == 11
-// getMaxSubSum([-2, -1, 1, 2]) == 3
-// getMaxSubSum([100, -9, 2, -3, 5]) == 100
-// getMaxSubSum([1, 2, 3]) == 6(берём все)
-// Если все элементы отрицательные – ничего не берём(подмассив пустой) и сумма равна «0»:
+// let arr = [ vasya, petya, masha ];
 
-// getMaxSubSum([-1, -2, -3]) = 0
-// Попробуйте придумать быстрое решение: O(n2), а лучше за О(n) операций.
+// sortByAge(arr);
+
+// // теперь: [vasya, masha, petya]
+// alert(arr[0].name); // Вася
+// alert(arr[1].name); // Маша
+// alert(arr[2].name); // Петя
 
 
-function getMaxSubSum(arr) {
-    let max = 0;
-    let current = 0;
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
 
-    for (let elem of arr) {
-        current += elem;
-        max = Math.max(max, current);
-        if (current < 0) current = 0;
-    }
+let arr = [vasya, petya, masha];
 
-    return max;
+function sortByAge(arr) {
+    arr.sort((a, b) => a.age - b.age);
 }
 
-console.log(getMaxSubSum([-1, 2, 3, -9])); // 5
-console.log(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
-console.log(getMaxSubSum([-2, -1, 1, 2])); // 3
-console.log(getMaxSubSum([100, -9, 2, -3, 5])); // 100
-console.log(getMaxSubSum([1, 2, 3])); // 6
-console.log(getMaxSubSum([-1, -2, -3])); // 0
+sortByAge(arr);
+
+console.log(arr);
+
+// теперь: [vasya, masha, petya]
+alert(arr[0].name); // Вася
+alert(arr[1].name); // Маша
+alert(arr[2].name); // Петя

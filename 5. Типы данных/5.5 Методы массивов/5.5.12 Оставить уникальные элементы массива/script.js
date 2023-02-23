@@ -1,41 +1,38 @@
-// Подмассив наибольшей суммы
-// важность: 2
-// На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
+// Оставить уникальные элементы массива
+// важность: 4
+// Пусть arr – массив строк.
 
-//     Задача: найти непрерывный подмассив в arr, сумма элементов в котором максимальна.
+// Напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные элементы arr.
 
-// Функция getMaxSubSum(arr) должна возвращать эту сумму.
+// Например:
 
-//     Например:
+// function unique(arr) {
+//   /* ваш код */
+// }
 
-// getMaxSubSum([-1, 2, 3, -9]) == 5(сумма выделенных элементов)
-// getMaxSubSum([2, -1, 2, 3, -9]) == 6
-// getMaxSubSum([-1, 2, 3, -9, 11]) == 11
-// getMaxSubSum([-2, -1, 1, 2]) == 3
-// getMaxSubSum([100, -9, 2, -3, 5]) == 100
-// getMaxSubSum([1, 2, 3]) == 6(берём все)
-// Если все элементы отрицательные – ничего не берём(подмассив пустой) и сумма равна «0»:
+// let strings = ["кришна", "кришна", "харе", "харе",
+//   "харе", "харе", "кришна", "кришна", ":-O"
+// ];
 
-// getMaxSubSum([-1, -2, -3]) = 0
-// Попробуйте придумать быстрое решение: O(n2), а лучше за О(n) операций.
+// alert( unique(strings) ); // кришна, харе, :-O
 
 
-function getMaxSubSum(arr) {
-    let max = 0;
-    let current = 0;
 
-    for (let elem of arr) {
-        current += elem;
-        max = Math.max(max, current);
-        if (current < 0) current = 0;
+function unique(arr) {
+    let filtredArr = [];
+
+    for (let item of arr) {
+        if (!filtredArr.includes(item)) {
+            filtredArr.push(item);
+        }
     }
 
-    return max;
+    return filtredArr;
+
 }
 
-console.log(getMaxSubSum([-1, 2, 3, -9])); // 5
-console.log(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
-console.log(getMaxSubSum([-2, -1, 1, 2])); // 3
-console.log(getMaxSubSum([100, -9, 2, -3, 5])); // 100
-console.log(getMaxSubSum([1, 2, 3])); // 6
-console.log(getMaxSubSum([-1, -2, -3])); // 0
+let strings = ["кришна", "кришна", "харе", "харе",
+    "харе", "харе", "кришна", "кришна", ":-O"
+];
+
+console.log(unique(strings)); // кришна, харе, :-O

@@ -1,41 +1,41 @@
-// Подмассив наибольшей суммы
-// важность: 2
-// На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
+// Трансформировать в объекты
+// важность: 5
+// У вас есть массив объектов user, и у каждого из объектов есть name, surname и id.
 
-//     Задача: найти непрерывный подмассив в arr, сумма элементов в котором максимальна.
+// Напишите код, который создаст ещё один массив объектов с параметрами id и fullName, где fullName – состоит из name и surname.
 
-// Функция getMaxSubSum(arr) должна возвращать эту сумму.
+// Например:
 
-//     Например:
+// let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+// let petya = { name: "Петя", surname: "Иванов", id: 2 };
+// let masha = { name: "Маша", surname: "Петрова", id: 3 };
 
-// getMaxSubSum([-1, 2, 3, -9]) == 5(сумма выделенных элементов)
-// getMaxSubSum([2, -1, 2, 3, -9]) == 6
-// getMaxSubSum([-1, 2, 3, -9, 11]) == 11
-// getMaxSubSum([-2, -1, 1, 2]) == 3
-// getMaxSubSum([100, -9, 2, -3, 5]) == 100
-// getMaxSubSum([1, 2, 3]) == 6(берём все)
-// Если все элементы отрицательные – ничего не берём(подмассив пустой) и сумма равна «0»:
+// let users = [ vasya, petya, masha ];
 
-// getMaxSubSum([-1, -2, -3]) = 0
-// Попробуйте придумать быстрое решение: O(n2), а лучше за О(n) операций.
+// let usersMapped = /* ... ваш код ... */
+
+// /*
+// usersMapped = [
+//   { fullName: "Вася Пупкин", id: 1 },
+//   { fullName: "Петя Иванов", id: 2 },
+//   { fullName: "Маша Петрова", id: 3 }
+// ]
+// */
+
+// alert( usersMapped[0].id ) // 1
+// alert( usersMapped[0].fullName ) // Вася Пупкин
+// Итак, на самом деле вам нужно трансформировать один массив объектов в другой. Попробуйте использовать =>. Это небольшая уловка.
 
 
-function getMaxSubSum(arr) {
-    let max = 0;
-    let current = 0;
+let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya = { name: "Петя", surname: "Иванов", id: 2 };
+let masha = { name: "Маша", surname: "Петрова", id: 3 };
 
-    for (let elem of arr) {
-        current += elem;
-        max = Math.max(max, current);
-        if (current < 0) current = 0;
-    }
+let users = [vasya, petya, masha];
 
-    return max;
-}
+let usersMapped = users.map(item => ({
+    fullName: `${item.name} ${item.surname}`,
+    id: item.id
+}));
 
-console.log(getMaxSubSum([-1, 2, 3, -9])); // 5
-console.log(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
-console.log(getMaxSubSum([-2, -1, 1, 2])); // 3
-console.log(getMaxSubSum([100, -9, 2, -3, 5])); // 100
-console.log(getMaxSubSum([1, 2, 3])); // 6
-console.log(getMaxSubSum([-1, -2, -3])); // 0
+console.log(usersMapped)

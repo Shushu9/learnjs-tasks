@@ -1,41 +1,62 @@
-// Подмассив наибольшей суммы
-// важность: 2
-// На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
+// Создайте объект с ключами из массива
+// важность: 4
+// Допустим, мы получили массив пользователей в виде {id:..., name:..., age:... }.
 
-//     Задача: найти непрерывный подмассив в arr, сумма элементов в котором максимальна.
+// Создайте функцию groupById(arr), которая создаст из него объект с id в качестве ключа и элементами массива в качестве значений.
 
-// Функция getMaxSubSum(arr) должна возвращать эту сумму.
+// Например:
 
-//     Например:
+// let users = [
+//   {id: 'john', name: "John Smith", age: 20},
+//   {id: 'ann', name: "Ann Smith", age: 24},
+//   {id: 'pete', name: "Pete Peterson", age: 31},
+// ];
 
-// getMaxSubSum([-1, 2, 3, -9]) == 5(сумма выделенных элементов)
-// getMaxSubSum([2, -1, 2, 3, -9]) == 6
-// getMaxSubSum([-1, 2, 3, -9, 11]) == 11
-// getMaxSubSum([-2, -1, 1, 2]) == 3
-// getMaxSubSum([100, -9, 2, -3, 5]) == 100
-// getMaxSubSum([1, 2, 3]) == 6(берём все)
-// Если все элементы отрицательные – ничего не берём(подмассив пустой) и сумма равна «0»:
+// let usersById = groupById(users);
 
-// getMaxSubSum([-1, -2, -3]) = 0
-// Попробуйте придумать быстрое решение: O(n2), а лучше за О(n) операций.
+// /*
+// // после вызова у нас должно получиться:
+
+// usersById = {
+//   john: {id: 'john', name: "John Smith", age: 20},
+//   ann: {id: 'ann', name: "Ann Smith", age: 24},
+//   pete: {id: 'pete', name: "Pete Peterson", age: 31},
+// }
+// */
+// Такая функция очень удобна при работе с данными, которые приходят с сервера.
+
+// В этой задаче мы предполагаем, что id уникален. Не может быть двух элементов массива с одинаковым id.
+
+// Используйте метод .reduce в решении.
 
 
-function getMaxSubSum(arr) {
-    let max = 0;
-    let current = 0;
+let users = [
+    { id: 'john', name: "John Smith", age: 20 },
+    { id: 'ann', name: "Ann Smith", age: 24 },
+    { id: 'pete', name: "Pete Peterson", age: 31 },
+];
 
-    for (let elem of arr) {
-        current += elem;
-        max = Math.max(max, current);
-        if (current < 0) current = 0;
-    }
 
-    return max;
+function groupById(users) {
+    return users.reduce((item, value) => {
+        item[value.id] = value;
+        return item;
+    }, {});
 }
 
-console.log(getMaxSubSum([-1, 2, 3, -9])); // 5
-console.log(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
-console.log(getMaxSubSum([-2, -1, 1, 2])); // 3
-console.log(getMaxSubSum([100, -9, 2, -3, 5])); // 100
-console.log(getMaxSubSum([1, 2, 3])); // 6
-console.log(getMaxSubSum([-1, -2, -3])); // 0
+
+let usersById = groupById(users);
+
+console.log(usersById);
+
+
+
+/*
+// после вызова у нас должно получиться:
+ 
+usersById = {
+  john: {id: 'john', name: "John Smith", age: 20},
+  ann: {id: 'ann', name: "Ann Smith", age: 24},
+  pete: {id: 'pete', name: "Pete Peterson", age: 31},
+}
+*/
